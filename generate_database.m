@@ -22,6 +22,8 @@ cd(db1_fs_dir);
 size1=size(dir ('*.jpg'))/2;
 file_list=dir('*.jpg');
 
+file_list_to_save={};
+
 disp('In Database 1');
 disp('Father-Son database');
 
@@ -65,8 +67,9 @@ for i=1:size1(1) % buffer bug check
 
 	tmp_vector2=bbbox(1,5:20);
 
-	face_part_matrix=[face_part_matrix;2*i-1,2*i,tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
-	
+	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}] %% Possible errors
+
 	disp('Calculated and added to the matrix ');
 end
 
@@ -75,7 +78,7 @@ disp('writing the matrix into file db1_fs.mat');
 
 cd(db1_dir);
 
-save('db1_fs.mat','face_part_matrix');
+save('db1_fs.mat','face_part_matrix','file_list_to_save');
 
 
 %%%%%%%%%%%%For father daughter%%%%%%%%%%%%%%%%%5
@@ -85,6 +88,8 @@ face_part_matrix=[];
 cd(db1_fd_dir);
 size1=size(dir ('*.jpg'))/2;
 file_list=dir('*.jpg');
+
+file_list_to_save={};
 
 disp('In Database 1');
 disp('Father-Daughter database');
@@ -129,7 +134,8 @@ for i=1:size1(1) % buffer bug check
 
 	tmp_vector2=bbbox(1,5:20);
 
-	face_part_matrix=[face_part_matrix;2*i-1,2*i,tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}] %% Possible errors
 	
 	disp('Calculated and added to the matrix ');
 end
@@ -139,7 +145,7 @@ disp('writing the matrix into file db1_fs.mat');
 
 cd(db1_dir);
 
-save('db1_fd.mat','face_part_matrix');
+save('db1_fd.mat','face_part_matrix','file_list_to_save');
 
 
 
@@ -150,6 +156,8 @@ face_part_matrix=[];
 cd(db1_ms_dir);
 size1=size(dir ('*.jpg'))/2;
 file_list=dir('*.jpg');
+
+file_list_to_save={};
 
 disp('In Database 1');
 disp('Mother-Son database');
@@ -194,7 +202,8 @@ for i=1:size1(1) % buffer bug check
 
 	tmp_vector2=bbbox(1,5:20);
 
-	face_part_matrix=[face_part_matrix;2*i-1,2*i,tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}]; %% Possible errors
 	
 	disp('Calculated and added to the matrix ');
 end
@@ -204,7 +213,7 @@ disp('writing the matrix into file db1_fs.mat');
 
 cd(db1_dir);
 
-save('db1_ms.mat','face_part_matrix');
+save('db1_ms.mat','face_part_matrix','file_list_to_save');
 
 
 
@@ -216,6 +225,8 @@ face_part_matrix=[];
 cd(db1_fs_dir);
 size1=size(dir ('*.jpg'))/2;
 file_list=dir('*.jpg');
+
+file_list_to_save={};
 
 disp('In Database 1');
 disp('Mother Daughter database');
@@ -260,7 +271,8 @@ for i=1:size1(1) % buffer bug check
 
 	tmp_vector2=bbbox(1,5:20);
 
-	face_part_matrix=[face_part_matrix;2*i-1,2*i,tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}]; %% Possible errors
 	
 	disp('Calculated and added to the matrix ');
 end
@@ -270,7 +282,7 @@ disp('writing the matrix into file db1_fs.mat');
 
 cd(db1_dir);
 
-save('db1_md.mat','face_part_matrix');
+save('db1_md.mat','face_part_matrix','file_list_to_save');
 
 
 
@@ -297,6 +309,8 @@ cd(db2_fs_dir);
 size1=size(dir ('*.jpg'))/2;
 file_list=dir('*.jpg');
 
+file_list_to_save={};
+
 disp('In Database 2');
 disp('Father-Son database');
 
@@ -340,7 +354,8 @@ for i=1:size1(1) % buffer bug check
 
 	tmp_vector2=bbbox(1,5:20);
 
-	face_part_matrix=[face_part_matrix;2*i-1,2*i,tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}]; %% Possible errors
 	
 	disp('Calculated and added to the matrix ');
 end
@@ -350,7 +365,7 @@ disp('writing the matrix into file db2_fs.mat');
 
 cd(db2_dir);
 
-save('db2_fs.mat','face_part_matrix');
+save('db2_fs.mat','face_part_matrix','file_list_to_save');
 
 
 %%%%%%%%%%%%For father daughter%%%%%%%%%%%%%%%%%5
@@ -360,6 +375,8 @@ face_part_matrix=[];
 cd(db2_fd_dir);
 size1=size(dir ('*.jpg'))/2;
 file_list=dir('*.jpg');
+
+file_list_to_save={};
 
 disp('In Database 2');
 disp('Father-Daughter database');
@@ -404,7 +421,8 @@ for i=1:size1(1) % buffer bug check
 
 	tmp_vector2=bbbox(1,5:20);
 
-	face_part_matrix=[face_part_matrix;2*i-1,2*i,tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}]; %% Possible errors
 	
 	disp('Calculated and added to the matrix ');
 end
@@ -414,7 +432,7 @@ disp('writing the matrix into file db2_fs.mat');
 
 cd(db2_dir);
 
-save('db2_fd.mat','face_part_matrix');
+save('db2_fd.mat','face_part_matrix','file_list_to_save');
 
 
 
@@ -425,6 +443,8 @@ face_part_matrix=[];
 cd(db2_ms_dir);
 size1=size(dir ('*.jpg'))/2;
 file_list=dir('*.jpg');
+
+file_list_to_save={};
 
 disp('In Database 2');
 disp('Mother-Son database');
@@ -469,7 +489,8 @@ for i=1:size1(1) % buffer bug check
 
 	tmp_vector2=bbbox(1,5:20);
 
-	face_part_matrix=[face_part_matrix;2*i-1,2*i,tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}]; %% Possible errors
 	
 	disp('Calculated and added to the matrix ');
 end
@@ -479,7 +500,7 @@ disp('writing the matrix into file db2_fs.mat');
 
 cd(db2_dir);
 
-save('db2_ms.mat','face_part_matrix');
+save('db2_ms.mat','face_part_matrix','file_list_to_save');
 
 
 
@@ -491,6 +512,8 @@ face_part_matrix=[];
 cd(db2_fs_dir);
 size1=size(dir ('*.jpg'))/2;
 file_list=dir('*.jpg');
+
+file_list_to_save={};
 
 disp('In Database 2');
 disp('Mother Daughter database');
@@ -535,7 +558,8 @@ for i=1:size1(1) % buffer bug check
 
 	tmp_vector2=bbbox(1,5:20);
 
-	face_part_matrix=[face_part_matrix;2*i-1,2*i,tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
+	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}]; %% Possible errors
 	
 	disp('Calculated and added to the matrix ');
 end
@@ -545,6 +569,6 @@ disp('writing the matrix into file db2_fs.mat');
 
 cd(db2_dir);
 
-save('db2_md.mat','face_part_matrix');
+save('db2_md.mat','face_part_matrix','file_list_to_save');
 
 

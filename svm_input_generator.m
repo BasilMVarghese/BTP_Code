@@ -5,20 +5,22 @@
 
 %}
 
-db1_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-I'
-db2_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-II'
-db1_fs_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-I/KinFaceW-I/images/father-son'
-db1_fd_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-I/KinFaceW-I/images/father-dau'
-db1_ms_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-I/KinFaceW-I/images/mother-son'
-db1_md_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-I/KinFaceW-I/images/mother-dau'
-db2_fs_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-II/KinFaceW-II/images/father-son'
-db2_fd_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-II/KinFaceW-II/images/father-dau'
-db2_ms_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-II/KinFaceW-II/images/mother-son'
-db2_md_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-II/KinFaceW-II/images/mother-dau'
-
 clear all;
-final_X=[] %% The final input variable for the svm to be created.
-final_Y=[] %% The final ouput variable . / Ground truth
+
+db1_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-I';
+db2_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-II';
+db1_fs_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-I/KinFaceW-I/images/father-son';
+db1_fd_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-I/KinFaceW-I/images/father-dau';
+db1_ms_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-I/KinFaceW-I/images/mother-son';
+db1_md_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-I/KinFaceW-I/images/mother-dau';
+db2_fs_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-II/KinFaceW-II/images/father-son';
+db2_fd_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-II/KinFaceW-II/images/father-dau';
+db2_ms_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-II/KinFaceW-II/images/mother-son';
+db2_md_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-II/KinFaceW-II/images/mother-dau';
+
+
+final_X=[]; %% The final input variable for the svm to be created.
+final_Y=[];%% The final ouput variable . / Ground truth
 
 
 
@@ -45,15 +47,23 @@ if size(face_part_matrix,1)~=size(file_list_to_save)
 	error('The number of image files and image matrix are not eqaul in db1');
 end
 
-cd(db1_fs_dir)
+cd(db1_fs_dir);
+disp('Inside a database image dir');
 
 for i=1:size(face_part_matrix)
 
-	img1=imread(file_list_to_save(i,1));
-	img2=imread(file_list_to_save(i,2));
+	
+	img1=imread(file_list_to_save{i,1});
+	img2=imread(file_list_to_save{i,2});
+
+	disp(strcat('Read image from : ',file_list_to_save(i,1),' && ',file_list_to_save(i,2)))
+
 
 	V=[1] %% Represent only the father-daughter relation
 	Z=findZforImages(img1,img2);
+	
+	disp('Calculated X for those images')
+
 	Y=findYforImages(img1,img2,face_part_matrix(i,:));
 
 	final_X=[final_X;V,Y,Z]  %% See the layer 1 part 2 documentaion
@@ -66,14 +76,19 @@ negative_perc=.2; %% Should never ever go above .5
 
 negatvie_count=negative_perc*size(face_part_matrix,1)
 
+disp ('Generating the negative image set')
+
 for i=1:negatvie_count
 
 	img1=imread(file_list_to_save(i,1));
 	img2=imread(file_list_to_save(size(face_part_matrix,1)-i,2));
 
+	disp(strcat('Generating negative pair with',file_list_to_save(i,1), ' && ',file_list_to_save(size(face_part_matrix,1)-i,2)))
+
 	V=[1] %% Represent only the father-daughter relation
 	Z=findZforImages(img1,img2);
 	Y=findYforImages(img1,img2,[face_part_matrix(i,1:16),face_part_matrix(size(face_part_matrix,1)-i,17:end)]);
+
 
 	final_X=[final_X;V,Y,Z]  %% See the layer 1 part 2 documentaion
 	final_Y=[final_Y;0]

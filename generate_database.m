@@ -9,6 +9,13 @@ db2_fd_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerifi
 db2_ms_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-II/KinFaceW-II/images/mother-son'
 db2_md_dir='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/New_database/KinFaceW-II/KinFaceW-II/images/mother-dau'
 
+base_output_image_path='/home/basil/Desktop/Google_Drive/Personal_Projects/BTP-KinshipVerification/image_db'
+
+rmdir(base_output_image_path,'s')
+
+mkdir(base_output_image_path)
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Manging the Database 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 pause on;
@@ -46,7 +53,7 @@ for i=1:size1(1) % buffer bug check
 	tmp_vector1=[]; % possible warning
 	tmp_vector2=[];
 
-	[bbbox bbimg] = detectFaceParts(detector,img1);
+	[bbbox bbimg1] = detectFaceParts(detector,img1);
 
 	if length(bbbox)==0
 
@@ -56,7 +63,7 @@ for i=1:size1(1) % buffer bug check
 	
 	tmp_vector1=bbbox(1,5:20);
 
-	[bbbox bbimg] = detectFaceParts(detector,img2);
+	[bbbox bbimg2] = detectFaceParts(detector,img2);
 
 
 	if length(bbbox)==0
@@ -68,7 +75,9 @@ for i=1:size1(1) % buffer bug check
 	tmp_vector2=bbbox(1,5:20);
 
 	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
-	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}] %% Possible errors
+	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}]; %% Possible errors
+	imwrite(bbimg1,strcat(base_output_image_path,'/db1_',file_list(2*i-1).name))
+	imwrite(bbimg2,strcat(base_output_image_path,'/db1_',file_list(2*i).name))
 
 	disp('Calculated and added to the matrix ');
 end
@@ -113,7 +122,7 @@ for i=1:size1(1) % buffer bug check
 	tmp_vector1=[]; % possible warning
 	tmp_vector2=[];
 
-	[bbbox bbimg] = detectFaceParts(detector,img1);
+	[bbbox bbimg1] = detectFaceParts(detector,img1);
 
 	if length(bbbox)==0
 
@@ -123,7 +132,7 @@ for i=1:size1(1) % buffer bug check
 	
 	tmp_vector1=bbbox(1,5:20);
 
-	[bbbox bbimg] = detectFaceParts(detector,img2);
+	[bbbox bbimg2] = detectFaceParts(detector,img2);
 
 
 	if length(bbbox)==0
@@ -135,7 +144,10 @@ for i=1:size1(1) % buffer bug check
 	tmp_vector2=bbbox(1,5:20);
 
 	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
-	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}] %% Possible errors
+	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}]; %% Possible errors
+	imwrite(bbimg1,strcat(base_output_image_path,'/db1_',file_list(2*i-1).name))
+	imwrite(bbimg2,strcat(base_output_image_path,'/db1_',file_list(2*i).name))
+
 	
 	disp('Calculated and added to the matrix ');
 end
@@ -181,7 +193,7 @@ for i=1:size1(1) % buffer bug check
 	tmp_vector1=[]; % possible warning
 	tmp_vector2=[];
 
-	[bbbox bbimg] = detectFaceParts(detector,img1);
+	[bbbox bbimg1] = detectFaceParts(detector,img1);
 
 	if length(bbbox)==0
 
@@ -191,7 +203,7 @@ for i=1:size1(1) % buffer bug check
 	
 	tmp_vector1=bbbox(1,5:20);
 
-	[bbbox bbimg] = detectFaceParts(detector,img2);
+	[bbbox bbimg2] = detectFaceParts(detector,img2);
 
 
 	if length(bbbox)==0
@@ -204,6 +216,9 @@ for i=1:size1(1) % buffer bug check
 
 	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
 	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}]; %% Possible errors
+	imwrite(bbimg1,strcat(base_output_image_path,'/db1_',file_list(2*i-1).name))
+	imwrite(bbimg2,strcat(base_output_image_path,'/db1_',file_list(2*i).name))
+
 	
 	disp('Calculated and added to the matrix ');
 end
@@ -250,7 +265,7 @@ for i=1:size1(1) % buffer bug check
 	tmp_vector1=[]; % possible warning
 	tmp_vector2=[];
 
-	[bbbox bbimg] = detectFaceParts(detector,img1);
+	[bbbox bbimg1] = detectFaceParts(detector,img1);
 
 	if length(bbbox)==0
 
@@ -260,7 +275,7 @@ for i=1:size1(1) % buffer bug check
 	
 	tmp_vector1=bbbox(1,5:20);
 
-	[bbbox bbimg] = detectFaceParts(detector,img2);
+	[bbbox bbimg2] = detectFaceParts(detector,img2);
 
 
 	if length(bbbox)==0
@@ -273,6 +288,9 @@ for i=1:size1(1) % buffer bug check
 
 	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
 	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}]; %% Possible errors
+	imwrite(bbimg1,strcat(base_output_image_path,'/db1_',file_list(2*i-1).name))
+	imwrite(bbimg2,strcat(base_output_image_path,'/db1_',file_list(2*i).name))
+
 	
 	disp('Calculated and added to the matrix ');
 end
@@ -333,7 +351,7 @@ for i=1:size1(1) % buffer bug check
 	tmp_vector1=[]; % possible warning
 	tmp_vector2=[];
 
-	[bbbox bbimg] = detectFaceParts(detector,img1);
+	[bbbox bbimg1] = detectFaceParts(detector,img1);
 
 	if length(bbbox)==0
 
@@ -343,7 +361,7 @@ for i=1:size1(1) % buffer bug check
 	
 	tmp_vector1=bbbox(1,5:20);
 
-	[bbbox bbimg] = detectFaceParts(detector,img2);
+	[bbbox bbimg2] = detectFaceParts(detector,img2);
 
 
 	if length(bbbox)==0
@@ -356,6 +374,9 @@ for i=1:size1(1) % buffer bug check
 
 	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
 	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}]; %% Possible errors
+	imwrite(bbimg1,strcat(base_output_image_path,'/db2_',file_list(2*i-1).name))
+	imwrite(bbimg2,strcat(base_output_image_path,'/db2_',file_list(2*i).name))
+
 	
 	disp('Calculated and added to the matrix ');
 end
@@ -400,7 +421,7 @@ for i=1:size1(1) % buffer bug check
 	tmp_vector1=[]; % possible warning
 	tmp_vector2=[];
 
-	[bbbox bbimg] = detectFaceParts(detector,img1);
+	[bbbox bbimg1] = detectFaceParts(detector,img1);
 
 	if length(bbbox)==0
 
@@ -410,7 +431,7 @@ for i=1:size1(1) % buffer bug check
 	
 	tmp_vector1=bbbox(1,5:20);
 
-	[bbbox bbimg] = detectFaceParts(detector,img2);
+	[bbbox bbimg2] = detectFaceParts(detector,img2);
 
 
 	if length(bbbox)==0
@@ -423,12 +444,15 @@ for i=1:size1(1) % buffer bug check
 
 	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
 	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}]; %% Possible errors
+	imwrite(bbimg1,strcat(base_output_image_path,'/db2_',file_list(2*i-1).name))
+	imwrite(bbimg2,strcat(base_output_image_path,'/db2_',file_list(2*i).name))
+
 	
 	disp('Calculated and added to the matrix ');
 end
 
 
-disp('writing the matrix into file db2_fs.mat');
+disp('writing the matrix into file db2_fd.mat');
 
 cd(db2_dir);
 
@@ -468,7 +492,7 @@ for i=1:size1(1) % buffer bug check
 	tmp_vector1=[]; % possible warning
 	tmp_vector2=[];
 
-	[bbbox bbimg] = detectFaceParts(detector,img1);
+	[bbbox bbimg1] = detectFaceParts(detector,img1);
 
 	if length(bbbox)==0
 
@@ -478,7 +502,7 @@ for i=1:size1(1) % buffer bug check
 	
 	tmp_vector1=bbbox(1,5:20);
 
-	[bbbox bbimg] = detectFaceParts(detector,img2);
+	[bbbox bbimg2] = detectFaceParts(detector,img2);
 
 
 	if length(bbbox)==0
@@ -491,12 +515,15 @@ for i=1:size1(1) % buffer bug check
 
 	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
 	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}]; %% Possible errors
+	imwrite(bbimg1,strcat(base_output_image_path,'/db2_',file_list(2*i-1).name))
+	imwrite(bbimg2,strcat(base_output_image_path,'/db2_',file_list(2*i).name))
+
 	
 	disp('Calculated and added to the matrix ');
 end
 
 
-disp('writing the matrix into file db2_fs.mat');
+disp('writing the matrix into file db2_ms.mat');
 
 cd(db2_dir);
 
@@ -509,7 +536,7 @@ save('db2_ms.mat','face_part_matrix','file_list_to_save');
 
 face_part_matrix=[];
 
-cd(db2_fs_dir);
+cd(db2_md_dir);
 size1=size(dir ('*.jpg'))/2;
 file_list=dir('*.jpg');
 
@@ -537,7 +564,7 @@ for i=1:size1(1) % buffer bug check
 	tmp_vector1=[]; % possible warning
 	tmp_vector2=[];
 
-	[bbbox bbimg] = detectFaceParts(detector,img1);
+	[bbbox bbimg1] = detectFaceParts(detector,img1);
 
 	if length(bbbox)==0
 
@@ -547,7 +574,7 @@ for i=1:size1(1) % buffer bug check
 	
 	tmp_vector1=bbbox(1,5:20);
 
-	[bbbox bbimg] = detectFaceParts(detector,img2);
+	[bbbox bbimg2] = detectFaceParts(detector,img2);
 
 
 	if length(bbbox)==0
@@ -560,12 +587,14 @@ for i=1:size1(1) % buffer bug check
 
 	face_part_matrix=[face_part_matrix;tmp_vector1,tmp_vector2]; %% Possible warning image1 count,image2 count, vector1, vector2 of currently 16 size each
 	file_list_to_save=[file_list_to_save;{file_list(2*i-1).name,file_list(2*i).name}]; %% Possible errors
+	imwrite(bbimg1,strcat(base_output_image_path,'/db2_',file_list(2*i-1).name))
+	imwrite(bbimg2,strcat(base_output_image_path,'/db2_',file_list(2*i).name))
 	
 	disp('Calculated and added to the matrix ');
 end
 
 
-disp('writing the matrix into file db2_fs.mat');
+disp('writing the matrix into file db2_md.mat');
 
 cd(db2_dir);
 
